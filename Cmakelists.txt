@@ -1,0 +1,23 @@
+cmake_minimum_required(VERSION 3.10)
+
+# 设置项目名称
+project(Snake)
+
+# 设置 C++ 标准
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+# 包含头文件路径
+include_directories(${CMAKE_SOURCE_DIR}/Includes)
+
+# 添加 SFML 子模块
+add_subdirectory(Libs/SFML)
+
+# 添加 Sources 文件夹下的所有 .cpp 文件
+file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/Sources/*.cpp)
+
+# 添加可执行文件（你可以改为自己的目标名）
+add_executable(Snake ${SOURCES})
+
+# 链接 SFML（使用源码编译方式的目标）
+target_link_libraries(Snake sfml-graphics sfml-window sfml-system)

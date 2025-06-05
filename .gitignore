@@ -1,4 +1,3 @@
-sfSnake.vcxproj
-sfSnake.vcxproj.filters
-Debug/
-Release/
+.cache/
+.vscode/
+Build/
