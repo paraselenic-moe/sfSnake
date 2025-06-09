@@ -7,11 +7,13 @@ project(Snake)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS on)
+
 # 包含头文件路径
 include_directories(${CMAKE_SOURCE_DIR}/Includes)
 
 # 添加 SFML 子模块
-add_subdirectory(Libs/SFML)
+add_subdirectory(Libraries/SFML)
 
 # 添加 Sources 文件夹下的所有 .cpp 文件
 file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/Sources/*.cpp)
@@ -20,4 +22,44 @@ file(GLOB_RECURSE SOURCES ${CMAKE_SOURCE_DIR}/Sources/*.cpp)
 add_executable(Snake ${SOURCES})
 
 # 链接 SFML（使用源码编译方式的目标）
-target_link_libraries(Snake sfml-graphics sfml-window sfml-system)
+target_link_libraries(Snake sfml-graphics sfml-window sfml-system sfml-audio)
+
+# --- 自动拷贝 DLL 到可执行目录 ---
+if(WIN32)
+    set(SFML_DLL_DIR "${CMAKE_CURRENT_BINARY_DIR}/Libraries/SFML/lib")
+    file(GLOB SFML_DLLS
+        "${SFML_DLL_DIR}/*.dll"
+    )
+
+    foreach(DLL ${SFML_DLLS})
+        add_custom_command(TARGET Snake POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${DLL}" $<TARGET_FILE_DIR:Snake>
+        )
+    endforeach()
+
+    set(OPENAL_DLL "${CMAKE_SOURCE_DIR}/Libraries/SFML/extlibs/bin/x64/openal32.dll")
+
+    if(EXISTS ${OPENAL_DLL})
+        add_custom_command(TARGET Snake POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${OPENAL_DLL}" $<TARGET_FILE_DIR:Snake>
+        )
+    else()
+        message(WARNING "openal32.dll not found at expected path: ${OPENAL_DLL}")
+    endif()
+
+    add_custom_command(TARGET Snake POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+                ${CMAKE_SOURCE_DIR}/Fonts ${CMAKE_BINARY_DIR}/Fonts
+    )
+    add_custom_command(TARGET Snake POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+                ${CMAKE_SOURCE_DIR}/Music ${CMAKE_BINARY_DIR}/Music
+    )
+    add_custom_command(TARGET Snake POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+                ${CMAKE_SOURCE_DIR}/Sounds ${CMAKE_BINARY_DIR}/Sounds
+    )
+
+endif()
