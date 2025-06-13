@@ -45,8 +45,6 @@ void BgScreen::render(sf::RenderWindow& window) {
     background.setFillColor(getColorFromOption(backgroundColor));
     window.draw(background);
 
-    if (gridColor == ColorOption::None) return;
-
     sf::Vector2u size = window.getSize();
     size_t rows = size.y / GridSize;
     size_t cols = size.x / GridSize;
@@ -70,6 +68,8 @@ void BgScreen::render(sf::RenderWindow& window) {
 
 sf::Color BgScreen::getColorFromOption(ColorOption option) {
     switch (option) {
+        case ColorOption::None:
+            return sf::Color(0, 0, 0, 0);
         case ColorOption::White:
             return sf::Color::White;
         case ColorOption::Brown:
