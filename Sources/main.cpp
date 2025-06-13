@@ -1,11 +1,10 @@
-#include "Game.h"
+#include "Core/Game.h"
 
 using namespace sfSnake;
 
-int main()
-{
-	Game game;
-	game.run();
+int main() {
+    Game game;
+    game.run();
 
-	return 0;
+    return 0;
 }
