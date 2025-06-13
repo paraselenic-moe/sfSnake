@@ -12,9 +12,9 @@ class Fruit {
 
     sf::Vector2f getPosition() const;
 
-   private:
     static const float Radius;
 
+   private:
     sf::Vector2f position;
 };
 }  // namespace sfSnake

@@ -67,7 +67,7 @@ void Snake::checkFruitCollisions(std::vector<Fruit>& fruits) {
     int growLength = 0;
 
     for (auto it = fruits.begin(); it != fruits.end();)
-        if (getDistance(headNode.getPosition(), it->getPosition()) <= SnakeNode::RenderRadius) {
+        if (getDistance(headNode.getPosition(), it->getPosition()) <= SnakeNode::RenderRadius + Fruit::Radius) {
             pickup = true;
             growLength++;  // TODO
             it = fruits.erase(it);
