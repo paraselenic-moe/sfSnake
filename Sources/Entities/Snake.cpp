@@ -12,21 +12,26 @@ using namespace sfSnake;
 
 const size_t Snake::InitialSize = 5;
 
+sf::SoundBuffer Snake::pickupBuffer;
+sf::Sound Snake::pickupSound;
+sf::SoundBuffer Snake::dieBuffer;
+sf::Sound Snake::dieSound;
+
 float getDistance(const sf::Vector2f& a, const sf::Vector2f& b) {
     return std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2));
 }
 
-Snake::Snake() : direction(-0.5 * M_PI), hitSelfFlag(false) {
-    initNodes();
-
-    pickupBuffer.loadFromFile("Sounds/pickup.wav");
+void Snake::loadSound() {
+    pickupBuffer.loadFromFile("Assets/pickup.wav");
     pickupSound.setBuffer(pickupBuffer);
     pickupSound.setVolume(30);
 
-    dieBuffer.loadFromFile("Sounds/die.wav");
+    dieBuffer.loadFromFile("Assets/die.wav");
     dieSound.setBuffer(dieBuffer);
     dieSound.setVolume(50);
 }
+
+Snake::Snake() : direction(-0.5 * M_PI), hitSelfFlag(false) { initNodes(); }
 
 void Snake::initNodes() {
     for (size_t i = 0; i < (Snake::InitialSize - 1) * Game::TicksPerNode + 1; i++)
@@ -97,5 +102,10 @@ void Snake::move() {
 }
 
 void Snake::render(sf::RenderWindow& window) {
-    for (size_t i = 0; i < nodes.size(); i += Game::TicksPerNode) nodes[i].render(window);
+    for (size_t i = nodes.size() - 1; i > 0; i -= Game::TicksPerNode) {
+        float direction = atan2(nodes[i].getPosition().y - nodes[i - Game::TicksPerNode].getPosition().y,
+                                nodes[i].getPosition().x - nodes[i - Game::TicksPerNode].getPosition().x);
+        nodes[i].render(window, direction, false);
+    }
+    nodes[0].render(window, direction, true);
 }

@@ -24,6 +24,8 @@ class Snake {
 
     size_t getSize() const;
 
+    static void loadSound();
+
    private:
     void move();
     void grow(size_t len);
@@ -34,16 +36,16 @@ class Snake {
     bool hitSelfFlag;
 
     sf::Vector2f position;
-    double direction;
-
-    sf::SoundBuffer pickupBuffer;
-    sf::Sound pickupSound;
-    sf::SoundBuffer dieBuffer;
-    sf::Sound dieSound;
+    float direction;
 
     std::vector<SnakeNode> nodes;
 
     static const size_t InitialSize;
+
+    static sf::SoundBuffer pickupBuffer;
+    static sf::Sound pickupSound;
+    static sf::SoundBuffer dieBuffer;
+    static sf::Sound dieSound;
 };
 }  // namespace sfSnake
 

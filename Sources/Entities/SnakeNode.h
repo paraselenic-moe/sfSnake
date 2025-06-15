@@ -13,16 +13,21 @@ class SnakeNode {
 
     void move(float xOffset, float yOffset);
 
-    void render(sf::RenderWindow& window);
+    void render(sf::RenderWindow& window, float direction, bool isHead);
 
     sf::Vector2f getPosition() const;
 
     static const float Radius;
     static const float RenderRadius;
 
+    static void loadTexture();
+
    private:
     sf::Vector2f position;
     float angle;
+
+    static sf::Texture snakeHeadTexture;
+    static sf::Texture snakeBodyTexture;
 };
 }  // namespace sfSnake
 
