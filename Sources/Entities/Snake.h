@@ -23,10 +23,10 @@ class Snake {
     void checkFruitCollisions(std::vector<Fruit>& fruits);
 
     bool hitSelf() const;
-    
+
     size_t getSize() const;
-    
-    private:
+
+   private:
     void move();
     void grow(size_t len);
     void checkEdgeCollisions();

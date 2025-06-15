@@ -20,7 +20,6 @@ class MenuScreen : public Screen {
     sf::Font font;
     sf::Text snakeText;
     sf::Text text;
-
 };
 }  // namespace sfSnake
 
