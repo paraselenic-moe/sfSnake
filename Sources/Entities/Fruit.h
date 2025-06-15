@@ -12,10 +12,17 @@ class Fruit {
 
     sf::Vector2f getPosition() const;
 
+    int getGrow() const;
+
     static const float Radius;
 
    private:
+    enum ColorOption { Black, Brown, Red, Blue, Green };
+
+    sf::Color getColorFromOption(ColorOption option) const;
+
     sf::Vector2f position;
+    ColorOption color;
 };
 }  // namespace sfSnake
 

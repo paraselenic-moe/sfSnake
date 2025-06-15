@@ -10,13 +10,11 @@
 #include "../Entities/Fruit.h"
 
 namespace sfSnake {
-enum class Direction { Left, Right, Up, Down };
-
 class Snake {
    public:
     Snake();
 
-    bool handleInput();
+    bool handleInput(sf::RenderWindow& windows);
     void update(sf::Time delta);
     void render(sf::RenderWindow& window);
 
@@ -36,11 +34,10 @@ class Snake {
     bool hitSelfFlag;
 
     sf::Vector2f position;
-    Direction direction;
+    double direction;
 
     sf::SoundBuffer pickupBuffer;
     sf::Sound pickupSound;
-
     sf::SoundBuffer dieBuffer;
     sf::Sound dieSound;
 

@@ -2,37 +2,37 @@
 
 using namespace sfSnake;
 
-const float BgScreen::GridSize = 48.f;
+const float BgScreen::GridSize = 48;
 
-BgScreen::BgScreen() : backgroundColor(ColorOption::Black), gridColor(ColorOption::None) {}
+BgScreen::BgScreen() : backgroundColor(Black), gridColor(None) {}
 
 bool BgScreen::handleInput(sf::RenderWindow& window) {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
-        backgroundColor = ColorOption::White;
+        backgroundColor = White;
         return true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
-        backgroundColor = ColorOption::Black;
+        backgroundColor = Black;
         return true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num3)) {
-        backgroundColor = ColorOption::Brown;
+        backgroundColor = Brown;
         return true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num4)) {
-        gridColor = ColorOption::None;
+        gridColor = None;
         return true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num5)) {
-        gridColor = ColorOption::White;
+        gridColor = White;
         return true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num6)) {
-        gridColor = ColorOption::Black;
+        gridColor = Black;
         return true;
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num7)) {
-        gridColor = ColorOption::Brown;
+        gridColor = Brown;
         return true;
     }
     return false;
@@ -66,17 +66,10 @@ void BgScreen::render(sf::RenderWindow& window) {
     }
 }
 
-sf::Color BgScreen::getColorFromOption(ColorOption option) {
-    switch (option) {
-        case ColorOption::None:
-            return sf::Color(0, 0, 0, 0);
-        case ColorOption::White:
-            return sf::Color::White;
-        case ColorOption::Brown:
-            return sf::Color(139, 69, 19);
-        case ColorOption::Black:
-            return sf::Color::Black;
-        default:
-            return sf::Color::White;
-    }
+sf::Color BgScreen::getColorFromOption(ColorOption option) const {
+    if (option == None) return sf::Color(0, 0, 0, 0);
+    if (option == White) return sf::Color::White;
+    if (option == Brown) return sf::Color(139, 69, 19);
+    if (option == Black) return sf::Color::Black;
+    return sf::Color(0, 0, 0, 0);
 }

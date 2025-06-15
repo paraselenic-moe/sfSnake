@@ -8,12 +8,12 @@
 
 using namespace sfSnake;
 
-const size_t GameScreen::MaxFruitsNum = 12;
+const size_t GameScreen::MaxFruitsNum = 8;
 
-GameScreen::GameScreen() : snake() {}
+GameScreen::GameScreen() {}
 
 bool GameScreen::handleInput(sf::RenderWindow& window) {
-    if (snake.handleInput()) return true;
+    if (snake.handleInput(window)) return true;
     return false;
 }
 
@@ -27,17 +27,14 @@ void GameScreen::update(sf::Time delta) {
 }
 
 void GameScreen::render(sf::RenderWindow& window) {
-    // TODO (4)
-
     snake.render(window);
-
-    for (auto fruit : fruits) fruit.render(window);
+    for (auto& fruit : fruits) fruit.render(window);
 }
 
 void GameScreen::generateFruit() {
     static std::default_random_engine engine(time(NULL));
-    static std::uniform_int_distribution<int> xDistribution(SnakeNode::Radius, Game::Width - SnakeNode::Radius);
-    static std::uniform_int_distribution<int> yDistribution(SnakeNode::Radius, Game::Height - SnakeNode::Radius);
+    static std::uniform_int_distribution<int> xDistribution(Fruit::Radius, Game::Width - Fruit::Radius);
+    static std::uniform_int_distribution<int> yDistribution(Fruit::Radius, Game::Height - Fruit::Radius);
 
     fruits.push_back(Fruit(sf::Vector2f(xDistribution(engine), yDistribution(engine))));
 }

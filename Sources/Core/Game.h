@@ -20,8 +20,8 @@ class Game {
     void update(sf::Time delta);
     void render();
 
-    static const int Width = 1920;
-    static const int Height = 1440;
+    static const int Width = 1600;
+    static const int Height = 900;
 
     static const int TPS = 60;
     static const int TicksPerNode = 8;
