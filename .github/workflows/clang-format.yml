@@ -1,0 +1,20 @@
+name: Run clang-format Linter
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4.2.2
+    - uses: DoozyX/clang-format-lint-action@v0.20
+      with:
+        inplace: True
+    - uses: EndBug/add-and-commit@v9.1.4
+      with:
+        author_name: Clang Robot
+        author_email: i@macesuted.moe
+        message: 'Committing clang-format changes'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
