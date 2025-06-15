@@ -9,7 +9,7 @@
 using namespace sfSnake;
 
 MenuScreen::MenuScreen() {
-    font.loadFromFile("Fonts/game_over.ttf");
+    font.loadFromFile("Assets/font.ttf");
     text.setFont(font);
     text.setString(
         "\n\n\n\n\n\n\n\n\nPress [SPACE] to play"

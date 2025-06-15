@@ -51,15 +51,12 @@ if(WIN32)
 
     add_custom_command(TARGET Snake POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
-                ${CMAKE_SOURCE_DIR}/Fonts ${CMAKE_BINARY_DIR}/Fonts
+                ${CMAKE_SOURCE_DIR}/Assets ${CMAKE_BINARY_DIR}/Assets
     )
+
     add_custom_command(TARGET Snake POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-                ${CMAKE_SOURCE_DIR}/Music ${CMAKE_BINARY_DIR}/Music
-    )
-    add_custom_command(TARGET Snake POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-                ${CMAKE_SOURCE_DIR}/Sounds ${CMAKE_BINARY_DIR}/Sounds
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+                ${CMAKE_BINARY_DIR}/compile_commands.json ${CMAKE_SOURCE_DIR}/compile_commands.json
     )
 
 endif()
