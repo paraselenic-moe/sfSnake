@@ -4,7 +4,6 @@
 #include "../Screens/Screen.h"
 
 namespace sfSnake {
-enum class ColorOption { None, White, Brown, Black };
 
 class BgScreen : public Screen {
    public:
@@ -17,7 +16,9 @@ class BgScreen : public Screen {
     static const float GridSize;
 
    private:
-    sf::Color getColorFromOption(ColorOption option);
+    enum ColorOption { None, White, Brown, Black };
+
+    sf::Color getColorFromOption(ColorOption option) const;
 
     ColorOption backgroundColor;
     ColorOption gridColor;

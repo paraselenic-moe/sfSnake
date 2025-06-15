@@ -5,7 +5,7 @@
 
 using namespace sfSnake;
 
-const float SnakeNode::Radius = 3.;
+const float SnakeNode::Radius = 2;
 const float SnakeNode::RenderRadius = Radius * Game::TicksPerNode * 1.4;
 
 SnakeNode::SnakeNode(sf::Vector2f position) : position(position) {}
